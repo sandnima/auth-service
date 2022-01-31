@@ -40,7 +40,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
 
     def authenticate(self, db: Session, *, email: str, password: str) -> Optional[User]:
         user_obj = self.get_by_email(db, email=email)
-        if not user:
+        if not user_obj:
             return None
         if not verify_password(password, user_obj.hashed_password):
             return None
